@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "teppo.kurki@iki.fi",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "baconjs": "^0.7.89",
+    "camelcase": "^4.0.0",
+    "debug": "^2.3.3",
+    "influx": "^5.0.4",
+    "latlon-geohash": "^1.1.0"
+  }
 }
