@@ -1,0 +1,11 @@
+{
+  "name": "signalk-influxwriter-provider",
+  "version": "0.0.1",
+  "description": "Signal K Node server provider that writes the data to InfluxDb",
+  "main": "influxwriter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "teppo.kurki@iki.fi",
+  "license": "Apache-2.0"
+}
