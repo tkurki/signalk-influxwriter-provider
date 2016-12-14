@@ -123,9 +123,10 @@ function getTrueWind(speed, windSpeed, windAngle, cog) {
   var apparentX = Math.cos(windAngle) * windSpeed
   var apparentY = Math.sin(windAngle) * windSpeed
   return {
-    environmentWindDirectionTrue: (Math.atan2(apparentY, -speed + apparentX) + cog) % (2 * Math.PI),
+    environmentWindDirectionTrue: (Math.atan2(apparentY/(-speed + apparentX)) + cog) % (2 * Math.PI),
     environmentWindSpeedTrue: Math.sqrt(Math.pow(apparentY, 2) + Math.pow(-speed + apparentX, 2))
   }
 }
+
 
 module.exports = InfluxWriter;
