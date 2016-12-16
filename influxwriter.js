@@ -119,12 +119,25 @@ function handleDelta(delta, accumulator, selfContext, trueWindSources, timestamp
   }
 }
 
-function getTrueWind(speed, windSpeed, windAngle, cog) {
-  var apparentX = Math.cos(windAngle) * windSpeed
-  var apparentY = Math.sin(windAngle) * windSpeed
+function getTrueWindSpeed(awa, aws, sog) {
+  return Math.sqrt(Math.pow(aws, 2) + Math.pow(sog, 2) - 2 * aws * sog * Math.cos(awa))
+}
+
+function getTrueWindAngle(awa, aws, sog, tws) {
+  const normalizedAwa = awa % (Math.PI * 2)
+  var sign = (normalizedAwa < 0 && -normalizedAwa < Math.PI) || (normalizedAwa > Math.PI) ? -1 : 1
+  var theTws = tws || getTrueWindSpeed(awa, aws, sog)
+  if(theTws === 0) {
+    return 0
+  }
+  return Math.acos((aws * Math.cos(awa) - sog) / theTws) * sign
+}
+
+function getTrueWind(sog, aws, awa, cog) {
+  const tws = getTrueWindSpeed(awa, aws, sog)
   return {
-    environmentWindDirectionTrue: (Math.atan2(apparentY/(-speed + apparentX)) + cog) % (2 * Math.PI),
-    environmentWindSpeedTrue: Math.sqrt(Math.pow(apparentY, 2) + Math.pow(-speed + apparentX, 2))
+    environmentWindDirectionTrue: (getTrueWindAngle(awa, aws, sog, tws) + cog) % (2 * Math.PI),
+    environmentWindSpeedTrue: tws
   }
 }
 
