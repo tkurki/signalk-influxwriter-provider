@@ -61,7 +61,7 @@ require('util').inherits(InfluxWriter, Transform);
 
 InfluxWriter.prototype._transform = function(delta, encoding, done) {
   handleDelta(delta, this.points, this.selfContext, this.trueWindSourceData, this)
-  if(this.points.length > 100) {
+  if(this.points.length > 1000) {
     this.influx.writePoints(this.points).then(() => done()).catch(err => {
       console.error("InfluxDb error: " + err.message)
       done()
