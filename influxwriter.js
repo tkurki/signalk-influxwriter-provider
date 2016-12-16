@@ -45,11 +45,6 @@ function InfluxWriter(options) {
       fields: getTrueWind(sog, aws, awa, cog),
       timestamp: that.timestamp
     }
-    // console.log("awa:" + awa)
-    // console.log("aws:" + aws)
-    // console.log("sog:" + sog)
-    // console.log("cog:" + cog)
-    // console.log(points.fields)
     return points
   }, [
     this.trueWindSourceData['environment.wind.angleApparent'],
